@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "mojangstrashcan:block/redstone_timer_side",
+    "down": "mojangstrashcan:block/redstone_timer_side",
+    "up": "mojangstrashcan:block/redstone_timer_side",
+    "north": "mojangstrashcan:block/redstone_timer_front",
+    "south": "mojangstrashcan:block/redstone_timer_side",
+    "west": "mojangstrashcan:block/redstone_timer_side",
+    "east": "mojangstrashcan:block/redstone_timer_side"
+  }
+}

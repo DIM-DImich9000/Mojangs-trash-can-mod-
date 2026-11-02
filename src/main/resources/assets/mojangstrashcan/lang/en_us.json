@@ -1,0 +1,52 @@
+{
+  "itemGroup.mojangstrashcan": "Mojang's trash can",
+
+  "block.mojangstrashcan.redstone_timer": "Redstone Timer",
+  "block.mojangstrashcan.ruby_ore": "Ruby Ore",
+  "block.mojangstrashcan.ruby_block": "Ruby Block",
+  "item.mojangstrashcan.ruby": "Ruby",
+  "item.mojangstrashcan.guide_book": "Mojang's trash can Guide Book",
+  "item.mojangstrashcan.quiver": "Quiver",
+
+  "gui.mojangstrashcan.redstone_timer.button.set": "Set",
+  "gui.mojangstrashcan.redstone_timer.label.min": "Min",
+  "gui.mojangstrashcan.redstone_timer.label.sec": "Sec",
+  "gui.mojangstrashcan.redstone_timer.label.tick": "Tick",
+  "gui.mojangstrashcan.redstone_timer.button.min_plus": "+1 Min",
+  "gui.mojangstrashcan.redstone_timer.button.min_minus": "-1 Min",
+  "gui.mojangstrashcan.redstone_timer.button.sec_plus": "+1 Sec",
+  "gui.mojangstrashcan.redstone_timer.button.sec_minus": "-1 Sec",
+  "gui.mojangstrashcan.redstone_timer.button.tick_plus": "+1 Tick",
+  "gui.mojangstrashcan.redstone_timer.button.tick_minus": "-1 Tick",
+  "gui.mojangstrashcan.redstone_timer.button.toggle": "Start/Stop",
+  "gui.mojangstrashcan.redstone_timer.button.reset": "Reset",
+  "gui.mojangstrashcan.redstone_timer.label.time": "Time: %s",
+
+  "item.mojangstrashcan.quiver.tooltip.empty": "Empty",
+  "item.mojangstrashcan.quiver.tooltip.entry": "• %s %s",
+  "item.mojangstrashcan.quiver.tooltip.total": "Total: %s",
+
+  "gui.mojangstrashcan.guide_book.tab.minerals": "Minerals & Ores",
+  "gui.mojangstrashcan.guide_book.tab.mechanisms": "Mechanisms",
+  "gui.mojangstrashcan.guide_book.tab.misc": "Misc",
+  "gui.mojangstrashcan.guide_book.tab.items": "Items",
+
+  "gui.mojangstrashcan.guide_book.title_page.left": "Guide to",
+  "gui.mojangstrashcan.guide_book.title_page.right": "Mojang's trash can",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.ruby_ore": "Ruby Ore",
+  "gui.mojangstrashcan.guide_book.recipe_desc.ruby_ore": "Generates in deepslate below Y=0. Requires an iron pickaxe.",
+  "gui.mojangstrashcan.guide_book.recipe_title.ruby": "Ruby",
+  "gui.mojangstrashcan.guide_book.recipe_desc.ruby": "Drops from ore (5-7). Used for crafting the block.",
+  "gui.mojangstrashcan.guide_book.recipe_title.ruby_block": "Ruby Block",
+  "gui.mojangstrashcan.guide_book.recipe_desc.ruby_block": "Created from 9 rubies. A compact storage.",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.timer": "Redstone Timer",
+  "gui.mojangstrashcan.guide_book.recipe_desc.timer": "Counts down time and emits a redstone pulse. Blinks while running and rings at the end.",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.book": "Guide Book",
+  "gui.mojangstrashcan.guide_book.recipe_desc.book": "Guide to the mod. Remembers the page and is given on first join.",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.quiver": "Quiver",
+  "gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage": "Stores up to 3 stacks of arrows. Bows use them first, starting from slot 1. Inventory arrows are only used after the quiver is empty."
+}

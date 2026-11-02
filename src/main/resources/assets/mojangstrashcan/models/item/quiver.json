@@ -1,0 +1,10 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": { "layer0": "mojangstrashcan:item/quiver_empty" },
+  "overrides": [
+    {
+      "predicate": { "mojangstrashcan:has_arrows": 1.0 },
+      "model": "mojangstrashcan:item/quiver_filled"
+    }
+  ]
+}
