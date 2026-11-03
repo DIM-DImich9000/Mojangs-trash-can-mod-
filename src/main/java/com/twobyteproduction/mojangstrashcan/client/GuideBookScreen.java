@@ -3,6 +3,7 @@ package com.twobyteproduction.mojangstrashcan.client;
 import com.twobyteproduction.mojangstrashcan.block.ModBlocks;
 import com.twobyteproduction.mojangstrashcan.item.ModItems;
 import com.twobyteproduction.mojangstrashcan.menu.GuideBookMenu;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -29,6 +30,7 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         this.setFocused(null);
     }
 
+    // Отключаем стандартную отрисовку названий
     @Override
     protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {}
 
@@ -43,6 +45,7 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         if (button == 0) {
             int category = menu.getCurrentCategory();
 
+            // Кнопка "Окей" на титульном листе
             if (category == 3) {
                 int btnX = leftPos + (imageWidth / 2) - 30;
                 int btnY = topPos + 120;
@@ -52,13 +55,15 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
                 }
             }
 
+            // Клики по закладкам
             if (category != 3 && mouseX >= leftPos - 30 && mouseX <= leftPos + 5) {
-                if (mouseY >= topPos + 15 && mouseY <= topPos + 55) { sendButton(0); return true; }
-                if (mouseY >= topPos + 65 && mouseY <= topPos + 105) { sendButton(1); return true; }
-                if (mouseY >= topPos + 115 && mouseY <= topPos + 155) { sendButton(2); return true; }
-                if (mouseY >= topPos + 165 && mouseY <= topPos + 205) { sendButton(4); return true; }
+                if (mouseY >= topPos + 15 && mouseY <= topPos + 55) { sendButton(0); return true; }   // Минералы
+                if (mouseY >= topPos + 65 && mouseY <= topPos + 105) { sendButton(1); return true; }  // Механизмы
+                if (mouseY >= topPos + 115 && mouseY <= topPos + 155) { sendButton(2); return true; } // Прочее
+                if (mouseY >= topPos + 165 && mouseY <= topPos + 205) { sendButton(4); return true; } // Предметы
             }
 
+            // Клики по стрелкам (влево/вправо)
             if (category != 3) {
                 if (mouseX >= leftPos + 40 && mouseX <= leftPos + 70 && mouseY >= topPos + imageHeight - 30 && mouseY <= topPos + imageHeight - 10) {
                     sendButton(10); return true;
@@ -75,6 +80,7 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
     protected void renderBg(@NotNull GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
         int category = menu.getCurrentCategory();
 
+        // 1. Отрисовка закладок (скрываем на титульном листе)
         if (category != 3) {
             drawTab(guiGraphics, leftPos - 30, topPos + 15, category == 0, 0xFF8B0000, 0xFF550000, new ItemStack(ModItems.RUBY.get()));
             drawTab(guiGraphics, leftPos - 30, topPos + 65, category == 1, 0xFF555555, 0xFF222222, new ItemStack(Items.REDSTONE));
@@ -82,13 +88,16 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
             drawTab(guiGraphics, leftPos - 30, topPos + 165, category == 4, 0xFF8A2BE2, 0xFF4B0082, new ItemStack(Items.AMETHYST_SHARD));
         }
 
-        guiGraphics.fill(leftPos + 5, topPos + 5, leftPos + imageWidth + 5, topPos + imageHeight + 5, 0x55000000);
-        guiGraphics.fill(leftPos - 5, topPos - 5, leftPos + imageWidth + 5, topPos + imageHeight + 5, 0xFF4F351D);
+        // 2. Обложка книги
+        guiGraphics.fill(leftPos + 5, topPos + 5, leftPos + imageWidth + 5, topPos + imageHeight + 5, 0x55000000); // Тень
+        guiGraphics.fill(leftPos - 5, topPos - 5, leftPos + imageWidth + 5, topPos + imageHeight + 5, 0xFF4F351D); // Кожа
 
+        // 3. Корешок (только если не титульный лист)
         if (category != 3) {
             guiGraphics.fill(leftPos + (imageWidth / 2) - 3, topPos - 5, leftPos + (imageWidth / 2) + 3, topPos + imageHeight + 5, 0xFF3A2410);
         }
 
+        // 4. Золотые уголки
         int gold = 0xFFD4AF37;
         int cornerSize = 10;
         guiGraphics.fill(leftPos - 5, topPos - 5, leftPos + cornerSize, topPos - 2, gold);
@@ -100,6 +109,7 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         guiGraphics.fill(leftPos + imageWidth - cornerSize, topPos + imageHeight + 2, leftPos + imageWidth + 5, topPos + imageHeight + 5, gold);
         guiGraphics.fill(leftPos + imageWidth + 2, topPos + imageHeight - cornerSize, leftPos + imageWidth + 5, topPos + imageHeight + 5, gold);
 
+        // 5. Страницы (пергамент)
         int pageColor = 0xFFF6E8D5;
         if (category == 3) {
             guiGraphics.fill(leftPos, topPos, leftPos + imageWidth, topPos + imageHeight, pageColor);
@@ -117,7 +127,7 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         g.fill(x, y, x + width, y + height, color);
         g.fill(x, y + height, x + width, y + height + 1, 0xFF000000);
         g.fill(x + width, y, x + width + 1, y + height, 0xFF000000);
-        g.fill(x + 12, y + height, x + 23, y + height + 3, 0x00000000);
+        g.fill(x + 12, y + height, x + 23, y + height + 3, 0x00000000); // Вырез закладки
         g.renderItem(icon, x + 9, y + 12);
     }
 
@@ -132,21 +142,23 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         int textColor = 0x3F2E1E;
         int yOffset = 30;
 
-        if (category == 0) {
+        // --- Отрисовка контента ---
+        if (category == 0) { // Минералы
             if (page == 0) renderRubyOre(guiGraphics, textColor, yOffset);
             else renderRubyBlock(guiGraphics, textColor, yOffset);
-        } else if (category == 1) {
+        } else if (category == 1) { // Механизмы
             if (page == 0) renderTimerRecipe(guiGraphics, textColor, yOffset);
-        } else if (category == 2) {
+        } else if (category == 2) { // Прочее
             if (page == 0) renderBookRecipe(guiGraphics, textColor, yOffset);
-        } else if (category == 3) {
+            else if (page == 1) renderHelmetPage(guiGraphics, textColor, yOffset);
+        } else if (category == 3) { // Титульный лист
             renderBigTitlePage(guiGraphics);
-        } else if (category == 4) {
-            // ИСПРАВЛЕНИЕ: Для колчана только 1 страница (page == 0)
+        } else if (category == 4) { // Предметы
             if (page == 0) renderQuiverPage(guiGraphics, textColor, yOffset);
+            else if (page == 1) renderExplosiveArrowPage(guiGraphics, textColor, yOffset);
         }
 
-        // Номера страниц и стрелки
+        // --- Номера страниц и стрелки (только для обычных вкладок) ---
         if (category != 3) {
             int leftPageNum = (page * 2) + 1;
             int rightPageNum = (page * 2) + 2;
@@ -154,19 +166,21 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
             guiGraphics.drawString(this.font, String.valueOf(leftPageNum), leftPos + 20, topPos + imageHeight - 20, 0x8B8B8B, false);
             guiGraphics.drawString(this.font, String.valueOf(rightPageNum), leftPos + imageWidth - 25, topPos + imageHeight - 20, 0x8B8B8B, false);
 
-            // Для 4-й вкладки (Колчан) прячем стрелки, так как страница всего одна
-            if (category != 4) {
-                if (page > 0) {
-                    guiGraphics.drawString(this.font, "<---", leftPos + 46, topPos + imageHeight - 21, 0xFF000000, false);
-                    guiGraphics.drawString(this.font, "<---", leftPos + 45, topPos + imageHeight - 22, 0xFF3A2410, false);
-                }
-                if (page < 1) {
-                    guiGraphics.drawString(this.font, "--->", leftPos + imageWidth - 76, topPos + imageHeight - 21, 0xFF000000, false);
-                    guiGraphics.drawString(this.font, "--->", leftPos + imageWidth - 75, topPos + imageHeight - 22, 0xFF3A2410, false);
-                }
+            // Проверяем, есть ли следующая/предыдущая страница
+            boolean hasNextPage = (category == 0 && page < 1) || (category == 2 && page < 1) || (category == 4 && page < 1);
+            boolean hasPrevPage = page > 0;
+
+            if (hasPrevPage) {
+                guiGraphics.drawString(this.font, "<---", leftPos + 46, topPos + imageHeight - 21, 0xFF000000, false);
+                guiGraphics.drawString(this.font, "<---", leftPos + 45, topPos + imageHeight - 22, 0xFF3A2410, false);
+            }
+            if (hasNextPage) {
+                guiGraphics.drawString(this.font, "--->", leftPos + imageWidth - 76, topPos + imageHeight - 21, 0xFF000000, false);
+                guiGraphics.drawString(this.font, "--->", leftPos + imageWidth - 75, topPos + imageHeight - 22, 0xFF3A2410, false);
             }
         }
 
+        // --- Подсказки закладок ---
         if (category != 3 && mouseX >= leftPos - 30 && mouseX <= leftPos + 5) {
             if (mouseY >= topPos + 15 && mouseY <= topPos + 55) guiGraphics.renderTooltip(this.font, Component.translatable("gui.mojangstrashcan.guide_book.tab.minerals"), mouseX, mouseY);
             else if (mouseY >= topPos + 65 && mouseY <= topPos + 105) guiGraphics.renderTooltip(this.font, Component.translatable("gui.mojangstrashcan.guide_book.tab.mechanisms"), mouseX, mouseY);
@@ -175,25 +189,9 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         }
     }
 
-    // ИСПРАВЛЕНИЕ: Объединили крафт и описание на одной странице
-    private void renderQuiverPage(GuiGraphics g, int textColor, int yOffset) {
-        int leftCenter = leftPos + 62;
-        int rightCenter = leftPos + 192;
-        int y = topPos + yOffset;
-
-        // Левая страница: Сетка крафта
-        ItemStack[] items = new ItemStack[]{
-                new ItemStack(Items.LEATHER), new ItemStack(Items.STRING), new ItemStack(Items.LEATHER),
-                new ItemStack(Items.LEATHER), null, new ItemStack(Items.LEATHER),
-                new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER)
-        };
-        drawCraftingGrid(g, leftCenter - 35, y + 15, items, new ItemStack(ModItems.QUIVER.get()));
-
-        // Правая страница: Описание использования
-        Component title = Component.translatable("gui.mojangstrashcan.guide_book.recipe_title.quiver");
-        g.drawString(this.font, title, rightCenter - (font.width(title) / 2), y, 0x8B0000, false);
-        drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage"), rightCenter, y + 20, 95, textColor);
-    }
+    // ==========================================
+    // --- МЕТОДЫ ОТРИСОВКИ СТРАНИЦ ---
+    // ==========================================
 
     private void renderBigTitlePage(GuiGraphics g) {
         int centerX = leftPos + (imageWidth / 2);
@@ -207,6 +205,7 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         int btnX = centerX - 30;
         int btnY = topPos + 120;
 
+        // Отрисовка кнопки "Окей"
         g.fill(btnX, btnY, btnX + 60, btnY + 20, 0xFF8B8B8B);
         g.fill(btnX, btnY, btnX + 60, btnY + 1, 0xFF373737);
         g.fill(btnX, btnY, btnX + 1, btnY + 20, 0xFF373737);
@@ -215,6 +214,85 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
 
         Component btnText = Component.literal("Окей");
         g.drawString(this.font, btnText, btnX + 30 - (font.width(btnText) / 2), btnY + 6, 0xFFFFFF, false);
+    }
+
+    private void renderQuiverPage(GuiGraphics g, int textColor, int yOffset) {
+        int leftCenter = leftPos + 62;
+        int rightCenter = leftPos + 192;
+        int y = topPos + yOffset;
+
+        ItemStack[] items = new ItemStack[]{
+                new ItemStack(Items.LEATHER), new ItemStack(Items.STRING), new ItemStack(Items.LEATHER),
+                new ItemStack(Items.LEATHER), null, new ItemStack(Items.LEATHER),
+                new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER), new ItemStack(Items.LEATHER)
+        };
+        drawCraftingGrid(g, leftCenter - 35, y + 15, items, new ItemStack(ModItems.QUIVER.get()));
+
+        Component title = Component.translatable("gui.mojangstrashcan.guide_book.recipe_title.quiver");
+        g.drawString(this.font, title, rightCenter - (font.width(title) / 2), y, 0x8B0000, false);
+        drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage"), rightCenter, y + 20, 95, textColor);
+    }
+
+    private void renderExplosiveArrowPage(GuiGraphics g, int textColor, int yOffset) {
+        int leftCenter = leftPos + 62;
+        int rightCenter = leftPos + 192;
+        int y = topPos + yOffset;
+
+        // Бесформенный крафт (ингредиенты просто лежат в сетке)
+        ItemStack[] items = new ItemStack[]{
+                new ItemStack(Items.FLINT), new ItemStack(Items.STICK), new ItemStack(Items.FEATHER),
+                new ItemStack(Items.PAPER), new ItemStack(Items.GUNPOWDER), null,
+                null, null, null
+        };
+        drawCraftingGrid(g, leftCenter - 35, y + 15, items, new ItemStack(ModItems.EXPLOSIVE_ARROW.get()));
+
+        // Надпись "Бесформенный"
+        Component shapeless = Component.translatable("gui.mojangstrashcan.guide_book.shapeless").withStyle(ChatFormatting.ITALIC);
+        g.drawString(this.font, shapeless, leftCenter - (font.width(shapeless) / 2), y + 80, 0x8B8B8B, false);
+
+        Component title = Component.translatable("gui.mojangstrashcan.guide_book.recipe_title.arrow");
+        g.drawString(this.font, title, rightCenter - (font.width(title) / 2), y, 0x8B0000, false);
+        g.renderItem(new ItemStack(ModItems.EXPLOSIVE_ARROW.get()), rightCenter - 8, y + 15);
+        drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.arrow"), rightCenter, y + 45, 95, textColor);
+    }
+
+    private void renderHelmetPage(GuiGraphics g, int textColor, int yOffset) {
+        int leftCenter = leftPos + 62;
+        int rightCenter = leftPos + 192;
+        int y = topPos + yOffset;
+
+        ItemStack[] items = new ItemStack[]{
+                null, new ItemStack(Items.GLASS), null,
+                new ItemStack(Items.IRON_INGOT), new ItemStack(Items.IRON_HELMET), new ItemStack(Items.IRON_INGOT),
+                null, new ItemStack(Items.LEATHER), null
+        };
+        drawCraftingGrid(g, leftCenter - 35, y + 15, items, new ItemStack(ModItems.LIGHT_HELMET.get()));
+
+        Component title = Component.translatable("gui.mojangstrashcan.guide_book.recipe_title.helmet");
+        g.drawString(this.font, title, rightCenter - (font.width(title) / 2), y, 0x8B0000, false);
+        g.renderItem(new ItemStack(ModItems.LIGHT_HELMET.get()), rightCenter - 8, y + 15);
+        drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.helmet"), rightCenter, y + 45, 95, textColor);
+    }
+
+    private void renderBookRecipe(GuiGraphics g, int textColor, int yOffset) {
+        int leftCenter = leftPos + 62;
+        int rightCenter = leftPos + 192;
+        int y = topPos + yOffset;
+
+        ItemStack[] items = new ItemStack[]{
+                null, null, null,
+                null, new ItemStack(Items.BOOK), null,
+                null, new ItemStack(Items.COPPER_INGOT), null
+        };
+        drawCraftingGrid(g, leftCenter - 35, y + 15, items, new ItemStack(ModItems.GUIDE_BOOK.get()));
+
+        // Надпись "Бесформенный"
+        Component shapeless = Component.translatable("gui.mojangstrashcan.guide_book.shapeless").withStyle(ChatFormatting.ITALIC);
+        g.drawString(this.font, shapeless, leftCenter - (font.width(shapeless) / 2), y + 80, 0x8B8B8B, false);
+
+        Component title = Component.translatable("gui.mojangstrashcan.guide_book.recipe_title.book");
+        g.drawString(this.font, title, rightCenter - (font.width(title) / 2), y, 0x8B0000, false);
+        drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.book"), rightCenter, y + 20, 95, textColor);
     }
 
     private void renderRubyOre(GuiGraphics g, int textColor, int yOffset) {
@@ -264,22 +342,9 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
         drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.timer"), rightCenter, y + 20, 95, textColor);
     }
 
-    private void renderBookRecipe(GuiGraphics g, int textColor, int yOffset) {
-        int leftCenter = leftPos + 62;
-        int rightCenter = leftPos + 192;
-        int y = topPos + yOffset;
-
-        ItemStack[] items = new ItemStack[]{
-                null, null, null,
-                null, new ItemStack(Items.BOOK), null,
-                null, new ItemStack(Items.COPPER_INGOT), null
-        };
-        drawCraftingGrid(g, leftCenter - 35, y + 15, items, new ItemStack(ModItems.GUIDE_BOOK.get()));
-
-        Component title = Component.translatable("gui.mojangstrashcan.guide_book.recipe_title.book");
-        g.drawString(this.font, title, rightCenter - (font.width(title) / 2), y, 0x8B0000, false);
-        drawCenteredWrappedText(g, Component.translatable("gui.mojangstrashcan.guide_book.recipe_desc.book"), rightCenter, y + 20, 95, textColor);
-    }
+    // ==========================================
+    // --- ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ---
+    // ==========================================
 
     private void drawCenteredWrappedText(GuiGraphics g, Component text, int centerX, int y, int width, int color) {
         List<FormattedCharSequence> lines = this.font.split(text, width);
@@ -295,9 +360,12 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
             for (int col = 0; col < 3; col++) {
                 int slotX = x + (col * slotSize);
                 int slotY = y + (row * slotSize);
+                // Фон слота
                 g.fill(slotX, slotY, slotX + 16, slotY + 16, 0xFF8B8B8B);
+                // Тень
                 g.fill(slotX, slotY, slotX + 16, slotY + 1, 0xFF373737);
                 g.fill(slotX, slotY, slotX + 1, slotY + 16, 0xFF373737);
+                // Блик
                 g.fill(slotX, slotY + 15, slotX + 16, slotY + 16, 0xFFFFFFFF);
                 g.fill(slotX + 15, slotY, slotX + 16, slotY + 16, 0xFFFFFFFF);
 
@@ -306,11 +374,13 @@ public class GuideBookScreen extends AbstractContainerScreen<GuideBookMenu> {
             }
         }
 
+        // Стрелочка
         int arrowX = x + (slotSize * 3) + 8;
         int arrowY = y + (slotSize * 3) / 2 - 4;
         g.fill(arrowX, arrowY + 2, arrowX + 10, arrowY + 6, 0xFF373737);
         g.fill(arrowX + 6, arrowY, arrowX + 10, arrowY + 8, 0xFF373737);
 
+        // Слот результата
         int resultX = arrowX + 14;
         int resultY = y + (slotSize * 3) / 2 - 8;
         g.fill(resultX, resultY, resultX + 16, resultY + 16, 0xFF8B8B8B);

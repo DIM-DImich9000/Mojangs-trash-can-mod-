@@ -15,20 +15,19 @@ public class ModCreativeTabs {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MOJANGS_TRASH_CAN_TAB =
             CREATIVE_MODE_TABS.register("mojangstrashcan_tab", () -> CreativeModeTab.builder()
-                    // Название вкладки (из файла переводов)
                     .title(Component.translatable("itemGroup.mojangstrashcan"))
-                    // Иконка вкладки (наша красная урна)
                     .icon(() -> new ItemStack(ModItems.TAB_ICON.get()))
-                    // Список предметов во вкладке
                     .displayItems((parameters, output) -> {
+                        // Предметы
                         output.accept(ModItems.GUIDE_BOOK.get());
                         output.accept(ModItems.QUIVER.get());
-                        output.accept(ModBlocks.REDSTONE_TIMER.get());
+                        output.accept(ModItems.LIGHT_HELMET.get());
+                        output.accept(ModItems.EXPLOSIVE_ARROW.get()); // НОВОЕ: Стрела
 
+                        // Блоки
+                        output.accept(ModBlocks.REDSTONE_TIMER.get());
                         output.accept(ModItems.RUBY.get());
                         output.accept(ModBlocks.RUBY_BLOCK.get());
                         output.accept(ModBlocks.RUBY_ORE.get());
-
-                        // Сам TAB_ICON мы сюда НЕ добавляем, чтобы он не лежал в инвентаре
                     }).build());
 }

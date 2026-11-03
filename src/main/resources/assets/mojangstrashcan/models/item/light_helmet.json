@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mojangstrashcan:item/light_helmet_off"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "mojangstrashcan:charged": 1.0
+      },
+      "model": "mojangstrashcan:item/light_helmet_on"
+    }
+  ]
+}

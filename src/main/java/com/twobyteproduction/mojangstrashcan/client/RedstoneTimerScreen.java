@@ -24,19 +24,20 @@ public class RedstoneTimerScreen extends AbstractContainerScreen<RedstoneTimerMe
 
         this.minInput = new EditBox(this.font, leftPos + 10, topPos + 50, 35, 16, Component.literal("Min"));
         this.minInput.setMaxLength(2);
-        this.minInput.setValue("0");
+        this.minInput.setValue("0"); // По умолчанию 0
         this.addRenderableWidget(this.minInput);
 
         this.secInput = new EditBox(this.font, leftPos + 50, topPos + 50, 35, 16, Component.literal("Sec"));
         this.secInput.setMaxLength(2);
-        this.secInput.setValue("10");
+        this.secInput.setValue("0"); // ИСПРАВЛЕНИЕ: Теперь по умолчанию 0 вместо 10
         this.addRenderableWidget(this.secInput);
 
         this.tickInput = new EditBox(this.font, leftPos + 90, topPos + 50, 35, 16, Component.literal("Tick"));
         this.tickInput.setMaxLength(2);
-        this.tickInput.setValue("0");
+        this.tickInput.setValue("0"); // По умолчанию 0
         this.addRenderableWidget(this.tickInput);
 
+        // Кнопка "Задать"
         this.addRenderableWidget(Button.builder(Component.translatable("gui.mojangstrashcan.redstone_timer.button.set"), b -> {
             int m = parseSafe(minInput.getValue());
             int s = parseSafe(secInput.getValue());
@@ -48,6 +49,7 @@ public class RedstoneTimerScreen extends AbstractContainerScreen<RedstoneTimerMe
             }
         }).bounds(leftPos + 130, topPos + 50, 36, 16).build());
 
+        // Кнопки + и -
         int startX = this.leftPos + 10;
         int startY = this.topPos + 100;
         int w = 40;
@@ -65,10 +67,10 @@ public class RedstoneTimerScreen extends AbstractContainerScreen<RedstoneTimerMe
         this.setFocused(null);
     }
 
-    // ИСПРАВЛЕНИЕ: Отключаем стандартную надпись "Инвентарь"
+    // Отключаем стандартные надписи
     @Override
     protected void renderLabels(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        // Пусто, чтобы ничего не рисовалось поверх
+        // Пусто
     }
 
     private int parseSafe(String val) {
@@ -105,10 +107,8 @@ public class RedstoneTimerScreen extends AbstractContainerScreen<RedstoneTimerMe
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         this.renderTooltip(guiGraphics, mouseX, mouseY);
 
-        // Заголовок
         guiGraphics.drawString(this.font, this.title, leftPos + 8, topPos + 6, 0x404040, false);
 
-        // Время
         int minutes = menu.getMinutes();
         int seconds = menu.getSeconds();
         int ticks = menu.getTicks();
@@ -116,7 +116,6 @@ public class RedstoneTimerScreen extends AbstractContainerScreen<RedstoneTimerMe
         Component timeText = Component.translatable("gui.mojangstrashcan.redstone_timer.label.time", timeString);
         guiGraphics.drawString(this.font, timeText, leftPos + 12, topPos + 27, 0xFFFFFF, false);
 
-        // Подписи под полями
         guiGraphics.drawString(this.font, Component.translatable("gui.mojangstrashcan.redstone_timer.label.min"), leftPos + 18, topPos + 70, 0x404040, false);
         guiGraphics.drawString(this.font, Component.translatable("gui.mojangstrashcan.redstone_timer.label.sec"), leftPos + 58, topPos + 70, 0x404040, false);
         guiGraphics.drawString(this.font, Component.translatable("gui.mojangstrashcan.redstone_timer.label.tick"), leftPos + 98, topPos + 70, 0x404040, false);

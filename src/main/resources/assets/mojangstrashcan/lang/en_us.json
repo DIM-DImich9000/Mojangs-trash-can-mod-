@@ -4,9 +4,19 @@
   "block.mojangstrashcan.redstone_timer": "Redstone Timer",
   "block.mojangstrashcan.ruby_ore": "Ruby Ore",
   "block.mojangstrashcan.ruby_block": "Ruby Block",
+
   "item.mojangstrashcan.ruby": "Ruby",
   "item.mojangstrashcan.guide_book": "Mojang's trash can Guide Book",
   "item.mojangstrashcan.quiver": "Quiver",
+  "item.mojangstrashcan.light_helmet": "Glowing Helmet",
+  "item.mojangstrashcan.explosive_arrow": "Explosive Arrow",
+
+  "item.mojangstrashcan.light_helmet.tooltip.charged": "Charged",
+  "item.mojangstrashcan.light_helmet.tooltip.empty": "Discharged",
+
+  "item.mojangstrashcan.quiver.tooltip.empty": "Empty",
+  "item.mojangstrashcan.quiver.tooltip.entry": "• %s %s",
+  "item.mojangstrashcan.quiver.tooltip.total": "Total: %s",
 
   "gui.mojangstrashcan.redstone_timer.button.set": "Set",
   "gui.mojangstrashcan.redstone_timer.label.min": "Min",
@@ -22,10 +32,6 @@
   "gui.mojangstrashcan.redstone_timer.button.reset": "Reset",
   "gui.mojangstrashcan.redstone_timer.label.time": "Time: %s",
 
-  "item.mojangstrashcan.quiver.tooltip.empty": "Empty",
-  "item.mojangstrashcan.quiver.tooltip.entry": "• %s %s",
-  "item.mojangstrashcan.quiver.tooltip.total": "Total: %s",
-
   "gui.mojangstrashcan.guide_book.tab.minerals": "Minerals & Ores",
   "gui.mojangstrashcan.guide_book.tab.mechanisms": "Mechanisms",
   "gui.mojangstrashcan.guide_book.tab.misc": "Misc",
@@ -34,10 +40,14 @@
   "gui.mojangstrashcan.guide_book.title_page.left": "Guide to",
   "gui.mojangstrashcan.guide_book.title_page.right": "Mojang's trash can",
 
+  "gui.mojangstrashcan.guide_book.shapeless": "* Shapeless",
+
   "gui.mojangstrashcan.guide_book.recipe_title.ruby_ore": "Ruby Ore",
   "gui.mojangstrashcan.guide_book.recipe_desc.ruby_ore": "Generates in deepslate below Y=0. Requires an iron pickaxe.",
+
   "gui.mojangstrashcan.guide_book.recipe_title.ruby": "Ruby",
   "gui.mojangstrashcan.guide_book.recipe_desc.ruby": "Drops from ore (5-7). Used for crafting the block.",
+
   "gui.mojangstrashcan.guide_book.recipe_title.ruby_block": "Ruby Block",
   "gui.mojangstrashcan.guide_book.recipe_desc.ruby_block": "Created from 9 rubies. A compact storage.",
 
@@ -48,5 +58,11 @@
   "gui.mojangstrashcan.guide_book.recipe_desc.book": "Guide to the mod. Remembers the page and is given on first join.",
 
   "gui.mojangstrashcan.guide_book.recipe_title.quiver": "Quiver",
-  "gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage": "Stores up to 3 stacks of arrows. Bows use them first, starting from slot 1. Inventory arrows are only used after the quiver is empty."
+  "gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage": "Stores up to 3 stacks of arrows. Bows use them first, starting from slot 1. Inventory arrows are only used after the quiver is empty.",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.helmet": "Glowing Helmet",
+  "gui.mojangstrashcan.guide_book.recipe_desc.helmet": "Shines light in the dark while worn and holding glowstone dust in the offhand. Drains charge over time (depends on randomTickSpeed).",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.arrow": "Explosive Arrow",
+  "gui.mojangstrashcan.guide_book.recipe_desc.arrow": "Explodes on impact, knocking back enemies and dealing medium damage. Does not destroy blocks."
 }

@@ -4,9 +4,19 @@
   "block.mojangstrashcan.redstone_timer": "Редстоун-таймер",
   "block.mojangstrashcan.ruby_ore": "Рубиновая руда",
   "block.mojangstrashcan.ruby_block": "Рубиновый блок",
+
   "item.mojangstrashcan.ruby": "Рубин",
   "item.mojangstrashcan.guide_book": "Руководство по Mojang's trash can",
   "item.mojangstrashcan.quiver": "Колчан",
+  "item.mojangstrashcan.light_helmet": "Светящаяся каска",
+  "item.mojangstrashcan.explosive_arrow": "Взрывная стрела",
+
+  "item.mojangstrashcan.light_helmet.tooltip.charged": "Заряжена",
+  "item.mojangstrashcan.light_helmet.tooltip.empty": "Разряжена",
+
+  "item.mojangstrashcan.quiver.tooltip.empty": "Пусто",
+  "item.mojangstrashcan.quiver.tooltip.entry": "• %s %s",
+  "item.mojangstrashcan.quiver.tooltip.total": "Всего: %s",
 
   "gui.mojangstrashcan.redstone_timer.button.set": "Задать",
   "gui.mojangstrashcan.redstone_timer.label.min": "Мин",
@@ -22,10 +32,6 @@
   "gui.mojangstrashcan.redstone_timer.button.reset": "Сброс",
   "gui.mojangstrashcan.redstone_timer.label.time": "Время: %s",
 
-  "item.mojangstrashcan.quiver.tooltip.empty": "Пусто",
-  "item.mojangstrashcan.quiver.tooltip.entry": "• %s %s",
-  "item.mojangstrashcan.quiver.tooltip.total": "Всего: %s",
-
   "gui.mojangstrashcan.guide_book.tab.minerals": "Минералы и Руды",
   "gui.mojangstrashcan.guide_book.tab.mechanisms": "Механизмы",
   "gui.mojangstrashcan.guide_book.tab.misc": "Прочее",
@@ -34,10 +40,14 @@
   "gui.mojangstrashcan.guide_book.title_page.left": "Руководство по",
   "gui.mojangstrashcan.guide_book.title_page.right": "Mojang's trash can",
 
+  "gui.mojangstrashcan.guide_book.shapeless": "* Бесформенный",
+
   "gui.mojangstrashcan.guide_book.recipe_title.ruby_ore": "Рубиновая руда",
   "gui.mojangstrashcan.guide_book.recipe_desc.ruby_ore": "Генерируется в глубинном сланце ниже Y=0. Требует железную кирку.",
+
   "gui.mojangstrashcan.guide_book.recipe_title.ruby": "Рубин",
   "gui.mojangstrashcan.guide_book.recipe_desc.ruby": "Выпадает из руды (5-7 шт). Используется для крафта блока.",
+
   "gui.mojangstrashcan.guide_book.recipe_title.ruby_block": "Рубиновый блок",
   "gui.mojangstrashcan.guide_book.recipe_desc.ruby_block": "Создается из 9 рубинов. Компактное хранилище.",
 
@@ -48,5 +58,11 @@
   "gui.mojangstrashcan.guide_book.recipe_desc.book": "Справочник по моду. Запоминает страницу и выдается при первом входе в мир.",
 
   "gui.mojangstrashcan.guide_book.recipe_title.quiver": "Колчан",
-  "gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage": "Хранит до 3 стаков стрел. Лук использует их в первую очередь, начиная с 1-го слота. Стрелы из инвентаря расходуются только после опустошения колчана."
+  "gui.mojangstrashcan.guide_book.recipe_desc.quiver_usage": "Хранит до 3 стаков стрел. Лук использует их в первую очередь, начиная с 1-го слота. Стрелы из инвентаря расходуются только после опустошения колчана.",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.helmet": "Светящаяся каска",
+  "gui.mojangstrashcan.guide_book.recipe_desc.helmet": "Светит в темноте, пока надет шлем и в левой руке есть светокаменная пыль. Тратит заряд со временем (зависит от randomTickSpeed).",
+
+  "gui.mojangstrashcan.guide_book.recipe_title.arrow": "Взрывная стрела",
+  "gui.mojangstrashcan.guide_book.recipe_desc.arrow": "Взрывается при попадании, отбрасывая врагов и нанося средний урон. Не разрушает блоки."
 }
